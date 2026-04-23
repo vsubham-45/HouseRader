@@ -1,0 +1,90 @@
+.gateway-wrap {
+  min-height: calc(100vh - 64px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.gateway-box {
+  width: 100%;
+  max-width: 520px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 30px 70px rgba(0,0,0,.12);
+}
+
+.gateway-header {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.gateway-amount {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-top: 6px;
+}
+
+.method-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.method-tab {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  cursor: pointer;
+  text-align: center;
+  background: #f9fbff;
+  transition: .2s;
+}
+
+.method-tab.active {
+  background: #eef6ff;
+  border-color: var(--primary);
+  font-weight: 600;
+}
+
+.method-panel {
+  display: none;
+  animation: fade .25s ease;
+}
+
+.method-panel.active {
+  display: block;
+}
+
+.field {
+  margin-bottom: 14px;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #dce3ea;
+}
+
+.field.row {
+  display: flex;
+  gap: 10px;
+}
+
+.pay-btn {
+  width: 100%;
+  margin-top: 18px;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+@keyframes fade {
+  from { opacity:0; transform: translateY(4px); }
+  to { opacity:1; transform: translateY(0); }
+}

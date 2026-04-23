@@ -1,0 +1,8 @@
+# public/uploads/attachments/.htaccess
+# prevent script execution
+Options -ExecCGI
+<FilesMatch "\.(php|php5|phtml|pl|py|jsp|asp|sh|cgi)$">
+  Require all denied
+</FilesMatch>
+# optional: disable directory listing
+Options -Indexes

@@ -1,0 +1,144 @@
+/* public/assets/css/seller_property_details.css
+   Page-specific styles for seller_property_details.php
+*/
+
+.seller-page { padding: 18px 12px; box-sizing: border-box; }
+.seller-top { display:flex; gap:14px; align-items:center; justify-content:space-between; margin-bottom:18px; flex-wrap:wrap; }
+.seller-info-left { display:flex; gap:12px; align-items:center; }
+.seller-title { font-size:20px; font-weight:900; color:var(--text); }
+.seller-info-right { display:flex; gap:10px; align-items:center; }
+
+.stat-small { display:flex; gap:10px; align-items:center; color:var(--muted); font-weight:700; }
+.stat-small .num { font-weight:900; color:var(--primary); }
+
+.featured-badge { margin-left:8px; padding:6px 10px; border-radius:8px; background: linear-gradient(90deg,var(--primary),var(--primary-variant)); color:#fff; font-weight:800; font-size:0.9rem; }
+
+ /* Layout: main + sidebar */
+.seller-main { display:grid; grid-template-columns: 1fr 340px; gap:22px; align-items:start; }
+@media (max-width:980px){ .seller-main{ grid-template-columns:1fr; } .card-side { order: 2; } .seller-left { order: 1; } }
+
+/* Gallery */
+.gallery-main {
+  width:100%;
+  height:420px;
+  border-radius:12px;
+  background-size:cover;
+  background-position:center;
+  background-color: rgba(0,0,0,0.04);
+  box-shadow: var(--elevation-1);
+  border: 1px solid rgba(0,0,0,0.04);
+}
+.gallery-thumbs {
+  display:flex;
+  gap:8px;
+  margin-top:12px;
+  overflow:auto;
+  -webkit-overflow-scrolling:touch;
+}
+.gallery-thumb {
+  width:84px;
+  height:64px;
+  border-radius:8px;
+  background-size:cover;
+  background-position:center;
+  flex:0 0 84px;
+  border:2px solid transparent;
+  cursor:pointer;
+  transition: transform .12s ease, border-color .12s ease;
+}
+.gallery-thumb.active { border-color:var(--primary); transform:scale(1.03); }
+
+/* Price + meta */
+.price-meta { margin-top:14px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.price-left .price-label { font-weight:900; font-size:20px; color:var(--primary); }
+.meta-row { display:flex; gap:12px; color:var(--muted); flex-wrap:wrap; margin-top:6px; }
+
+/* subtle address styling (muted, unobtrusive) */
+.meta-row .address {
+  color: var(--muted);
+  font-weight:600;
+  font-size:0.95rem;
+  opacity:0.95;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width:46ch; /* keep it from taking too much visual space */
+}
+
+/* Config pills */
+.section-configs .configs-wrap { display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
+.cfg-pill { padding:8px 10px; border-radius:10px; background:var(--card); border:1px solid rgba(0,0,0,0.04); font-weight:800; display:inline-flex; align-items:center; gap:8px; }
+.cfg-price { color:var(--muted); font-weight:700; }
+
+/* Description & amenities */
+.section-desc, .section-amen, .section-map { margin-top:16px; }
+.desc-text { color:var(--muted); line-height:1.45; }
+.amen-wrap { display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
+.amen-pill { padding:6px 8px; border-radius:8px; background:var(--card); border:1px solid rgba(0,0,0,0.04); font-weight:700; color:var(--muted); }
+
+/* Sidebar card */
+.card-side { background:var(--card); padding:14px; border-radius:12px; box-shadow: var(--elevation-1); }
+.card-side h3 { margin-top:0; margin-bottom:10px; }
+.perf-grid { display:flex; flex-direction:column; gap:8px; }
+.perf-row { display:flex; justify-content:space-between; align-items:center; gap:8px; }
+.perf-val { font-weight:900; color:var(--primary); }
+
+/* Actions */
+.sidebar-actions { margin-top:12px; display:flex; flex-direction:column; gap:8px; }
+.overlay-btn { display:inline-block; padding:8px 10px; border-radius:8px; background:transparent; border:1px solid rgba(0,0,0,0.06); color:inherit; font-weight:700; text-decoration:none; text-align:center; }
+.overlay-btn.outline { background:transparent; }
+.overlay-btn:hover { transform: translateY(-2px); }
+
+/* Feature modal styles */
+.modal-backdrop { position:fixed; inset:0; background:rgba(2,8,14,0.45); display:none; align-items:center; justify-content:center; z-index:2000; }
+.modal { width:520px; max-width:calc(100% - 32px); background:var(--card); border-radius:12px; padding:18px; box-shadow: var(--shadow-strong, 0 18px 60px rgba(14,30,37,0.08)); }
+.modal .close { float:right; background:transparent;border:0;font-size:18px;cursor:pointer; color:var(--muted); }
+.plan { border:1px solid rgba(0,0,0,0.06); padding:12px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:10px; }
+.plan .price { font-weight:900; color:var(--primary); }
+.feature-cta { display:inline-block; padding:8px 10px; border-radius:8px; background:linear-gradient(180deg,var(--primary),var(--primary-variant)); color:#fff; font-weight:800; text-decoration:none; }
+
+/* Buttons */
+.btn-edit { padding:8px 12px; border-radius:8px; border:1px solid rgba(0,0,0,0.06); background:transparent; font-weight:800; text-decoration:none; color:inherit; }
+.btn-outline { padding:8px 10px; border-radius:8px; border:1px solid rgba(0,0,0,0.06); background:transparent; cursor:pointer; }
+
+/* small responsive tweaks */
+@media (max-width:520px){
+  .gallery-main { height:260px; }
+  .gallery-thumb { width:64px; height:52px; flex:0 0 64px; }
+  .seller-top { flex-direction:column; align-items:flex-start; gap:12px; }
+}
+
+/* =========================
+   TOGGLE LISTING BUTTON
+========================= */
+
+#toggleListingBtn {
+  font-weight: 800;
+  transition: all 0.25s ease;
+}
+
+/* UNLIST (danger style) */
+#toggleListingBtn[data-action="unlist"] {
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #ef4444;
+}
+
+#toggleListingBtn[data-action="unlist"]:hover {
+  background: #ef4444;
+  color: #fff;
+  border-color: #ef4444;
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.3);
+}
+
+/* RELIST (success style) */
+#toggleListingBtn[data-action="relist"] {
+  border-color: rgba(34, 197, 94, 0.4);
+  color: #22c55e;
+}
+
+#toggleListingBtn[data-action="relist"]:hover {
+  background: #22c55e;
+  color: #fff;
+  border-color: #22c55e;
+  box-shadow: 0 6px 20px rgba(34, 197, 94, 0.3);
+}

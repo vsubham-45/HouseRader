@@ -1,0 +1,147 @@
+/* edit_profile.css - theme-aware overrides for edit profile page.
+   Relies on index.css for global variables; uses light/dark rules here. */
+
+/* Layout */
+.container {
+  max-width: 920px;
+  margin: 28px auto;
+  padding: 12px;
+}
+
+/* Card & form */
+.form-card {
+  padding: 20px;
+  display: block;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+  background: #ffffff; /* default light bg */
+  transition: background .18s ease, box-shadow .18s ease;
+}
+
+/* Labels & inputs */
+.field { display:block; margin-bottom:14px; }
+.field-label {
+  display:block;
+  margin-bottom:8px;
+  font-weight:700;
+  color: #233240; /* default muted label color */
+}
+.form-card input {
+  width:100%;
+  padding:12px 14px;
+  border-radius:10px;
+  border:1px solid rgba(34,50,64,0.08);
+  background: #fff;
+  color: #0b1720;
+  font-size:15px;
+  outline: none;
+  transition: border-color .12s ease, background .12s ease;
+}
+.form-card input:focus {
+  border-color: rgba(36,94,255,0.9);
+  box-shadow: 0 6px 18px rgba(36,94,255,0.06);
+}
+
+/* Buttons */
+.form-actions { display:flex; justify-content:flex-end; gap:12px; margin-top:18px; flex-wrap:wrap; }
+.btn-muted {
+  background: transparent;
+  border: 1px solid rgba(34,50,64,0.06);
+  padding: 10px 14px;
+  border-radius:10px;
+  color: #233240;
+  text-decoration:none;
+  display:inline-block;
+}
+.btn-primary {
+  background: linear-gradient(180deg,#4c8cff,#2f6bff);
+  border: none;
+  color: #fff;
+  padding:10px 18px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+/* Error card */
+.card-error {
+  background: rgba(255,0,0,0.03);
+  border-left:4px solid rgba(255,0,0,0.15);
+  padding:12px;
+  margin-bottom:12px;
+}
+
+/* Responsiveness */
+@media (max-width: 700px) {
+  .container { padding: 14px; margin: 18px auto; }
+  .form-card { padding: 16px; }
+  .form-actions { justify-content: space-between; }
+  .btn-primary, .btn-muted { width: 48%; }
+}
+
+/* --------------------------
+   Dark mode overrides
+   (applies when <html> has class "dark")
+   -------------------------- */
+.dark .form-card {
+  background: #091016; /* dark card bg */
+  box-shadow: 0 6px 30px rgba(2,6,12,0.6);
+}
+
+.dark .field-label {
+  color: var(--muted-text, #9aa6b2);
+}
+
+.dark .form-card input {
+  background: transparent;
+  color: var(--text, #e6f0f7);
+  border: 1px solid rgba(255,255,255,0.04);
+  box-shadow: none;
+}
+
+.dark .form-card input:focus {
+  border-color: rgba(79,143,255,0.9);
+  box-shadow: 0 6px 18px rgba(16,40,62,0.45);
+}
+
+.dark .btn-muted {
+  border: 1px solid rgba(255,255,255,0.04);
+  color: var(--muted-text, #9aa6b2);
+}
+
+.dark .btn-primary {
+  background: linear-gradient(180deg,#5f92ff,#3b6cff);
+  color: #fff;
+}
+
+/* small accessibility tweak: increase hit area on inputs on mobile */
+@media (max-width: 420px) {
+  .form-card input { padding:14px; }
+  .field-label { font-size:14px; }
+}
+
+/* avatar row */
+.avatar-row { display:flex; align-items:center; gap:12px; }
+.avatar-preview {
+  min-width:48px;
+  min-height:48px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:24px;
+  border-radius:8px;
+  border:1px solid rgba(34,50,64,0.06);
+  background: #fff;
+  padding:8px;
+}
+.dark .avatar-preview {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.04);
+  color: var(--text, #e6f0f7);
+}
+.hint { display:block; margin-top:6px; color:var(--muted-text, #7b8b96); font-size:13px; }
+
+.profile-avatar img,
+.pm-avatar img,
+.icon-btn img {
+  display: block;
+}

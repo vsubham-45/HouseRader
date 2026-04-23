@@ -1,0 +1,514 @@
+/* public/assets/css/property_details.css
+   HouseRader — Property details page styles
+   Responsive, dark-mode aware, gallery + non-jumping thumbnails,
+   config pills, map container with close button, de-emphasized furnishing.
+   Uses theme variables defined in index.css if present; provides conservative fallbacks.
+*/
+
+/* --------------------------
+   Theme variables (single, consolidated)
+   -------------------------- */
+:root{
+  --primary: #1ea1ff;
+  --primary-variant: #0b7ed8;
+  --card: #ffffff;
+  --text: #06202b;
+  --muted: #57707a;
+  --muted-text: #6b7280;
+  --accent-weak: rgba(30,161,255,0.06);
+  --tag-bg: rgba(0,0,0,0.04);
+  --radius: 12px;
+  --card-gap: 18px;
+  --elevation-1: 0 8px 30px rgba(14,30,37,0.06);
+  --elevation-2: 0 12px 36px rgba(14,30,37,0.08);
+  --shadow-soft: 0 6px 18px rgba(14,30,37,0.06);
+}
+
+/* Dark theme compatibility (mirror index.css expectations) */
+html.dark, .dark {
+  --card: #0b1b2a;
+  --text: #e6f4ff;
+  --muted: #9ab3c9;
+  --muted-text: #9fb2c9;
+  --accent-weak: rgba(115,174,240,0.06);
+  --tag-bg: rgba(255,255,255,0.03);
+  --shadow-soft: 0 8px 28px rgba(2,8,14,0.6);
+}
+
+/* --------------------------
+   Layout helpers (page container/grid)
+   -------------------------- */
+.property-page, .main-wrap {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.property-grid, .main-wrap {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 28px;
+  align-items: start;
+}
+
+@media (max-width: 980px) {
+  .property-grid, .main-wrap { grid-template-columns: 1fr; }
+}
+
+/* --------------------------
+   GALLERY
+   -------------------------- */
+.gallery { display:block; margin-bottom: 8px; }
+
+/* Main image area
+   Important: prevent tiling/duplication by forcing no-repeat/cover/center */
+.gallery-main {
+  width:100%;
+  height:520px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  background-color: var(--card);
+  position: relative;
+  transition: transform .45s cubic-bezier(.2,.8,.2,1), background-image .18s ease;
+  overflow: hidden;
+  will-change: background-image;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Reduce height on smaller screens */
+@media (max-width: 1100px) { .gallery-main { height:420px; } }
+@media (max-width: 520px)  { .gallery-main { height:240px; border-radius: 10px; } }
+
+/* Ensure inline style background-image cannot cause repeat due to other rules */
+.gallery-main[style*="background-image"] {
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-position: center center !important;
+}
+
+/* Gallery arrow controls - more polished */
+.gallery-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 60;
+  width:44px;
+  height:44px;
+  border-radius: 12px;
+  display:grid;
+  place-items:center;
+  cursor: pointer;
+  background: rgba(255,255,255,0.95);
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 8px 22px rgba(14,30,37,0.06);
+  font-weight:800;
+  user-select:none;
+  color: var(--text);
+  transition: transform .12s ease, background .12s ease, box-shadow .12s ease;
+  border: none;
+}
+
+/* position */
+.gallery-arrow.left  { left:12px; }
+.gallery-arrow.right { right:12px; }
+
+/* Dark mode arrow look */
+html.dark .gallery-arrow {
+  background: rgba(9,16,25,0.6);
+  border: 1px solid rgba(255,255,255,0.06);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+}
+
+/* Hover / focus */
+.gallery-arrow:hover, .gallery-arrow:focus {
+  transform: translateY(-50%) scale(1.04);
+  outline: none;
+  box-shadow: 0 10px 26px rgba(14,30,37,0.09);
+}
+
+/* Caption/position badge */
+.gallery-caption {
+  position:absolute;
+  left:12px;
+  bottom:12px;
+  z-index:55;
+  padding:6px 10px;
+  border-radius:8px;
+  background: rgba(0,0,0,0.55);
+  color:#fff;
+  font-size:13px;
+  font-weight:700;
+}
+
+/* Thumbnails row */
+.gallery-thumbs {
+  display:flex;
+  gap:10px;
+  padding:12px 6px;
+  margin-top:10px;
+  overflow:auto;
+  -webkit-overflow-scrolling: touch;
+}
+.gallery-thumbs::-webkit-scrollbar { height:8px; }
+.gallery-thumbs::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.06); border-radius:8px; }
+
+/* individual thumb */
+.thumb {
+  width:100px;
+  height:72px;
+  border-radius:8px;
+  background-size:cover;
+  background-position:center;
+  cursor:pointer;
+  border:2px solid transparent;
+  box-shadow: 0 4px 10px rgba(14,30,37,0.04);
+  flex: 0 0 auto;
+  transition: transform .12s ease, border-color .12s ease, box-shadow .12s ease;
+  outline: none;
+}
+.thumb:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(14,30,37,0.06); }
+.thumb.active {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(21,101,192,0.08);
+}
+
+/* smaller thumbs */
+@media (max-width: 520px) {
+  .thumb { width: 68px; height: 52px; border-radius:8px; }
+  .gallery-thumbs { gap:8px; padding:8px; }
+}
+
+/* --------------------------
+   SPECS / CONFIGS / AMENITIES
+   -------------------------- */
+.specs-grid { display:flex; gap:12px; flex-wrap:wrap; margin-top:12px; }
+.spec {
+  background: var(--card);
+  padding:10px 12px;
+  border-radius:10px;
+  box-shadow: var(--elevation-1);
+  min-width:120px;
+  font-size:14px;
+  color:var(--text);
+  border: 1px solid rgba(0,0,0,0.04);
+}
+.label { font-weight:700; margin-bottom:6px; color:var(--text); }
+.value-muted { color:var(--muted-text); }
+
+/* Config pills */
+.config-pills { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+.config-pill {
+  padding:8px 12px;
+  border-radius:999px;
+  background: var(--tag-bg);
+  cursor:pointer;
+  font-weight:700;
+  border:1px solid transparent;
+  user-select:none;
+  transition: transform .12s ease, background .12s ease, color .12s ease;
+  color: var(--text);
+}
+.config-pill:focus { outline: 3px solid rgba(30,161,255,0.12); outline-offset: 3px; }
+.config-pill.active {
+  background: linear-gradient(90deg,var(--primary),var(--primary-variant));
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(21,101,192,0.06);
+}
+
+/* Config info card */
+.config-info {
+  margin-top:12px;
+  background: var(--card);
+  padding:12px;
+  border-radius:10px;
+  display:flex;
+  gap:12px;
+  align-items:center;
+  box-shadow: var(--elevation-1);
+  border: 1px solid rgba(0,0,0,0.04);
+}
+.config-info .ci-item { min-width:120px; }
+.ci-label { font-weight:700; color:var(--muted-text); font-size:12px; display:block; }
+.ci-val { font-weight:800; color:var(--text); margin-top:4px; }
+
+/* Furnishing — intentionally de-emphasized */
+.furnishing { margin-top:10px; font-size:13px; color:var(--muted-text); }
+
+/* Amenities */
+.amenities-list { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+.amenity {
+  background: var(--tag-bg);
+  color:var(--text);
+  padding:8px 10px;
+  border-radius:999px;
+  font-size:13px;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+html.dark .amenity { border-color: rgba(255,255,255,0.04); }
+
+/* Description block */
+.description {
+  background: var(--card);
+  padding:16px;
+  border-radius:10px;
+  box-shadow: var(--elevation-1);
+  margin-top:12px;
+  color:var(--text);
+  line-height:1.65;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+
+/* --------------------------
+   MAP + CTA
+   -------------------------- */
+/* Use inherited text color by default so inline styles can override (eg. Show map uses inline color) */
+.cta-btn {
+  display:inline-block;
+  text-decoration:none;
+  padding:8px 12px;
+  border-radius:8px;
+  font-weight:800;
+  color: inherit;           /* IMPORTANT: let inline styles or context set readable text color */
+  border:0;
+  cursor:pointer;
+  box-shadow: none;
+}
+
+/* specific CTAs with explicit background and white text */
+.cta-call { background: linear-gradient(180deg,#2b67b4,#184f9a); color: #fff; }
+.cta-mail { background: linear-gradient(180deg,#28a06b,#1f7a53); color: #fff; margin-left:8px; }
+
+/* Map wrapper and map element (hidden until requested by JS) */
+#mapContainer, #mapWrapper, #map {
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow: var(--shadow-soft);
+  background: #eef5fb;
+}
+#map { width:100%; height:360px; display:block; }
+@media (max-width:980px) { #map { height:260px; } }
+
+/* Map close button */
+.map-close-btn {
+  position:absolute;
+  top:10px;
+  right:10px;
+  z-index:1000;
+  background: rgba(0,0,0,0.6);
+  color:#fff;
+  border:0;
+  padding:6px 10px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:800;
+}
+html.dark .map-close-btn { background: rgba(255,255,255,0.08); color:var(--text); }
+
+/* --------------------------
+   SIDEBAR / CONTACT CARD
+   -------------------------- */
+.property-sidebar { position: relative; }
+.contact-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding:16px;
+  box-shadow: var(--elevation-1);
+  border: 1px solid rgba(0,0,0,0.04);
+}
+.contact-card h3 { margin:0 0 6px 0; font-size:18px; color:var(--text); }
+.contact-card .muted { color:var(--muted); font-size:13px; margin-bottom:8px; }
+.contact-card .cta-btn { width:100%; display:block; margin-top:10px; }
+
+/* reduce visual weight of box-shadow in dark */
+html.dark .contact-card { box-shadow: 0 8px 18px rgba(0,0,0,0.5); border-color: rgba(255,255,255,0.03); }
+
+/* subtle responsive: sidebar sticks on larger screens */
+@media (min-width:1100px) {
+  .property-sidebar { position: sticky; top:82px; align-self:start; }
+}
+
+/* --------------------------
+   Accessibility / focus
+   -------------------------- */
+.thumb:focus, .config-pill:focus, .gallery-arrow:focus, .cta-btn:focus, .map-close-btn:focus {
+  outline: 3px solid rgba(30,161,255,0.12);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+/* make card visuals slightly different in dark mode */
+html.dark .spec,
+html.dark .config-info,
+html.dark .description,
+html.dark .contact-card,
+html.dark .gallery-main {
+  border-color: rgba(255,255,255,0.04);
+  box-shadow: var(--shadow-soft);
+  background: var(--card);
+  color: var(--text);
+}
+
+/* small screen adjustments */
+@media (max-width:520px) {
+  .gallery-caption { font-size:12px; padding:5px 8px; }
+  .spec { min-width: 100px; padding:8px 10px; }
+  .config-info { flex-direction:column; align-items:flex-start; gap:8px; }
+  .contact-card { padding:12px; }
+}
+
+/* --------------------------
+   RENTAL-SPECIFIC STYLES
+   -------------------------- */
+
+/* Rental badge */
+.rental-badge {
+  display:inline-block;
+  background: linear-gradient(90deg,var(--primary),var(--primary-variant));
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-weight: 800;
+  font-size: 0.9rem;
+  box-shadow: 0 8px 20px rgba(14,30,37,0.08);
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+/* Rental section wrapper */
+.rental-section { margin-top: 12px; display:block; background: transparent; }
+
+/* Emphasize rent figures */
+.rent-value, .price-rent {
+  display:inline-block;
+  font-weight:900;
+  font-size:1.12rem;
+  color:var(--primary);
+  letter-spacing:0.2px;
+}
+
+/* Compact rent style inside contact card */
+.contact-card .rent-value {
+  font-size:1.05rem;
+  color:var(--text);
+  background: linear-gradient(90deg, rgba(30,161,255,0.08), rgba(30,161,255,0.04));
+  padding:6px 8px;
+  border-radius:8px;
+  margin-top:6px;
+}
+
+/* Rental row helper */
+.rental-row { display:flex; gap:8px; align-items:center; flex-wrap:wrap; color:var(--muted-text); margin-top:6px; }
+.rental-row strong { font-weight:800; color:var(--text); margin-right:6px; }
+
+/* Missing value helper */
+.no-value {
+  color: var(--muted-text);
+  font-style: italic;
+  opacity: 0.85;
+}
+
+/* If server marks empty blocks */
+[data-empty="1"] { display: none !important; }
+
+/* Compact config-pill for rental use */
+.config-pills { margin-top: 10px; }
+.config-pill { padding:7px 10px; font-weight:800; font-size:14px; }
+
+/* Rental carpet emphasis */
+.rental-area { font-weight:800; color:var(--text); }
+
+/* Panel feel when rental section contains only rental info */
+.rental-panel {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 10px 12px;
+  box-shadow: var(--elevation-1);
+  border: 1px solid rgba(0,0,0,0.04);
+  margin-top: 12px;
+}
+
+/* If page body has .for-rent, make contact CTAs more contrasty */
+.for-rent .contact-card .cta-call { background: linear-gradient(180deg,#1f5fb2,#154a8a); color:#fff; }
+.for-rent .contact-card .cta-mail { background: linear-gradient(180deg,#238a63,#1b6e4f); color:#fff; }
+
+/* Rent strip decoration in caption for rentals */
+.for-rent .gallery-caption {
+  background: linear-gradient(90deg, rgba(30,161,255,0.12), rgba(111,183,255,0.06));
+  color: var(--text);
+  font-weight:700;
+}
+
+@media (max-width:520px) {
+  .rental-row { flex-direction: column; align-items:flex-start; gap:6px; }
+  .rent-value { font-size:1rem; }
+  .rental-panel { padding:10px; }
+}
+
+/* Accessibility focus for rent-related elements */
+.config-pill:focus, .cta-call:focus, .cta-mail:focus {
+  outline: 3px solid rgba(30,161,255,0.12);
+  outline-offset: 3px;
+}
+
+/* Fallback class-based emphasis if PHP didn't add `for-rent` */
+.price-rent { font-weight:900; color:var(--primary); }
+
+
+/* subtle address styles for property details (muted, unobtrusive) */
+.prop-address {
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.95rem;
+  opacity: 0.95;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 48ch; /* keeps it from visually dominating the header */
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* small tweak for address inside sidebar contact card */
+.property-sidebar .contact-card .prop-address {
+  display: block;
+  font-size: 0.95rem;
+  line-height: 1.25;
+  color: var(--muted);
+  max-width: 100%;
+  word-break: break-word; /* allow wrapping in the sidebar */
+}
+
+/* End of property_details.css */
+
+/* =====================================
+   DARK MODE MAP BUTTON VISIBILITY FIX
+   (Overrides inline styles safely)
+   ===================================== */
+
+/* Show map button — force readable contrast in dark mode */
+html.dark .show-map-btn {
+  background: rgba(255,255,255,0.12) !important;
+  color: #e6f4ff !important;
+  border: 1px solid rgba(255,255,255,0.18) !important;
+}
+
+html.dark .show-map-btn:hover {
+  background: rgba(255,255,255,0.18) !important;
+}
+
+/* Close (✕) button — high contrast on map tiles */
+html.dark .map-close-btn {
+  background: rgba(0,0,0,0.7);
+  color: #ffffff;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+}
+
+html.dark .map-close-btn:hover {
+  background: rgba(0,0,0,0.85);
+}

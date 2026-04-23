@@ -1,0 +1,18 @@
+/* public/assets/css/feature_webhook.css
+   Small theme-aware styles for webhook status pages / debugging.
+*/
+
+body { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial; margin:0; padding:16px; background: var(--bg, #f4f8ff); color: var(--text, #06202b); }
+.container { max-width:920px; margin:18px auto; padding:18px; background: var(--card, #fff); border-radius:12px; box-shadow: var(--elevation-1, 0 10px 30px rgba(14,30,37,0.06)); border:1px solid rgba(0,0,0,0.04); }
+.h1 { font-size:18px; font-weight:800; margin:0 0 8px 0; }
+.muted { color: var(--muted, #57707a); font-size:13px; margin-bottom:12px; }
+.ok { padding:10px 12px; border-radius:8px; background: rgba(230,255,245,0.95); color: #05693c; border:1px solid rgba(0,120,80,0.06); }
+.err { padding:10px 12px; border-radius:8px; background: rgba(255,230,230,0.95); color: #9a1a1a; border:1px solid rgba(255,50,50,0.06); }
+.keyval { margin-top:10px; font-size:13px; }
+.keyval b { display:inline-block; width:160px; color:var(--muted, #57707a); }
+:root.dark .container { background: var(--card, #071325); border:1px solid rgba(255,255,255,0.03); color:var(--text,#e6f4ff); }
+:root.dark .ok { background: rgba(12,60,40,0.12); color: #bfead1; border:1px solid rgba(12,60,40,0.08); }
+:root.dark .err { background: rgba(80,20,20,0.12); color:#ffb6b6; border:1px solid rgba(255,50,50,0.06); }
+
+/* small util */
+.small { font-size:12px; color:var(--muted,#6b7b84); margin-top:8px; display:block; }

@@ -1,0 +1,126 @@
+/* public/assets/css/profile.css
+   Lightweight profile styles that follow the same theme variables as index.css.
+   This file intentionally mirrors the variable names so dark/light mode works
+   whether or not index.css is already loaded.
+*/
+
+/* Theme variables (light) */
+:root {
+  --primary: #1ea1ff;
+  --primary-variant: #0b7ed8;
+  --bg: linear-gradient(180deg,#f7fbff 0%, #eef6ff 100%);
+  --surface: #ffffff;
+  --card: #ffffff;
+  --text: #06202b;
+  --muted: #57707a;
+  --accent-weak: rgba(30,161,255,0.08);
+  --radius: 12px;
+  --elevation-1: 0 8px 30px rgba(14,30,37,0.06);
+  --elevation-2: 0 12px 36px rgba(14,30,37,0.08);
+  --elevation-3: 0 18px 50px rgba(14,30,37,0.10);
+}
+
+/* Dark theme overrides */
+html.dark, .dark {
+  --primary: #73aef0;
+  --primary-variant: #2e66a8;
+  --bg: linear-gradient(180deg,#051021 0%, #071927 100%);
+  --surface: #071326;
+  --card: #0b1b2a;
+  --text: #e6f4ff;
+  --muted: #9ab3c9;
+  --accent-weak: rgba(115,174,240,0.06);
+  --elevation-1: 0 8px 30px rgba(2,8,14,0.6);
+  --elevation-2: 0 12px 36px rgba(2,8,14,0.7);
+}
+
+/* Page */
+body { background: var(--bg); color: var(--text); }
+
+/* Profile hero */
+.profile-hero { padding: 28px 0 12px; text-align:center; }
+.profile-hero .hero-title { margin:0 0 6px; font-size:22px; font-weight:800; color:var(--text); }
+.profile-hero .hero-sub { margin:0 0 12px; color:var(--muted); }
+
+/* layout */
+.profile-wrapper {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 18px;
+  margin: 18px 0;
+
+  /* Fix: ensure both columns align at the top (prevents left card from dropping) */
+  align-items: start;
+}
+
+/* Ensure the main/right column stacks its cards from the top */
+.profile-main {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.profile-card {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: var(--elevation-1);
+  border: 1px solid rgba(0,0,0,0.04);
+}
+
+.profile-avatar {
+  width:72px;
+  height:72px;
+  border-radius:12px;
+  display:inline-grid;
+  place-items:center;
+  font-size:32px;
+  background: var(--accent-weak);
+  color: var(--primary-variant);
+  margin-bottom:8px;
+}
+
+.profile-name { font-weight:800; font-size:1.05rem; margin-bottom:4px; color:var(--text); }
+.profile-email { color:var(--muted); font-size:0.95rem; margin-bottom:8px; }
+.profile-phone { color:var(--muted); font-size:0.95rem; margin-bottom:8px; }
+
+.profile-actions { margin-top:12px; display:flex; flex-direction:column; gap:8px; }
+
+.btn-block { display:block; width:100%; text-align:center; padding:10px 12px; border-radius:10px; font-weight:800; text-decoration:none; border:1px solid rgba(0,0,0,0.06); cursor:pointer; background:transparent; color:var(--text); }
+.btn-primary { background: linear-gradient(180deg,var(--primary),var(--primary-variant)); color:#fff; border:none; padding:10px 12px; border-radius:10px; font-weight:800; cursor:pointer; display:inline-block; text-decoration:none; }
+.btn-primary.inverted { background:transparent; border:1px solid rgba(0,0,0,0.06); color:var(--text); }
+.btn-primary.logout { background: linear-gradient(180deg,var(--primary),var(--primary-variant)); color:#fff; }
+
+/* main cards */
+.profile-main .card {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: var(--elevation-1);
+  border: 1px solid rgba(0,0,0,0.04);
+}
+
+.account-list { margin:0; padding:0; list-style:none; }
+.account-list .row { display:flex; gap:12px; padding:8px 0; border-bottom: 1px dashed rgba(0,0,0,0.04); }
+.account-list dt { width:140px; font-weight:700; color:var(--muted); }
+.account-list dd { margin:0; color:var(--text); }
+
+/* flash */
+.flash { padding:10px 12px; border-radius:10px; margin:12px 0; }
+.flash-info { background: rgba(30,161,255,0.08); color: var(--primary-variant); }
+.flash-success { background: rgba(0,200,100,0.08); color: #0b6b36; }
+.flash-error { background: rgba(255,200,200,0.12); color: #8b1a1a; }
+
+/* responsive */
+@media (max-width:980px) {
+  .profile-wrapper { grid-template-columns: 1fr; }
+  .profile-card { order: 2; }
+  .profile-main { order: 1; }
+  .profile-avatar { width:60px; height:60px; font-size:28px; }
+}
+
+.profile-avatar img,
+.pm-avatar img,
+.icon-btn img {
+  display: block;
+}

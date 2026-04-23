@@ -1,0 +1,334 @@
+/* public/assets/css/seller_property_form_template.css
+   Refreshed styling to match HouseRader theme and dark mode
+   - Uses index.css variables (var(--primary), var(--card), etc.)
+   - Polished inputs, pills, file-control, responsive layout
+   - Added address field + map button styles
+   - Author: HouseRader UI
+*/
+
+/* ---------- form variables ---------- */
+:root{
+  --form-gap: 14px;
+  --label-color: var(--muted);
+  --input-border: rgba(0,0,0,0.06);
+  --input-bg: var(--card);
+  --card-border: rgba(0,0,0,0.04);
+  --accent-weak-2: rgba(30,161,255,0.08);
+  --pill-bg: rgba(30,161,255,0.06);
+  --pill-border: rgba(30,161,255,0.12);
+  --file-bg: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.25));
+  --disabled: rgba(0,0,0,0.06);
+}
+
+/* ---------- card wrapper (uses existing .card) ---------- */
+.card {
+  background: var(--card);
+  border-radius: 14px;
+  border: 1px solid var(--card-border);
+  box-shadow: var(--elevation-1);
+  padding: 20px;
+  color: var(--text);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Headings */
+.card h2, .card h3 { margin: 0 0 8px 0; color: var(--text); font-weight:800; }
+.card p.lead { color: var(--muted); margin:6px 0 12px 0; }
+
+/* ---------- labels & small helpers ---------- */
+label { display:block; font-weight:700; color:var(--label-color); margin-bottom:8px; font-size:0.95rem; }
+.muted { color:var(--muted); font-size:0.95rem; }
+
+/* ---------- inputs / selects / textarea ---------- */
+.card input[type="text"],
+.card input[type="email"],
+.card input[type="tel"],
+.card input[type="number"],
+.card input[type="file"],
+.card select,
+.card textarea {
+  width:100%;
+  padding:12px 14px;
+  border-radius:10px;
+  border:1px solid var(--input-border);
+  background: var(--input-bg);
+  color: var(--text);
+  font-size:14px;
+  transition: box-shadow .12s ease, border-color .12s ease, transform .06s ease;
+  box-shadow: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* subtle inner shadow for inputs on light theme */
+.card input[type="text"]:not([disabled]),
+.card select:not([disabled]),
+.card textarea:not([disabled]) {
+  box-shadow: 0 2px 8px rgba(8,20,30,0.03) inset;
+}
+
+/* textarea */
+.card textarea { min-height:120px; resize:vertical; }
+
+/* focus */
+.card input:focus, .card select:focus, .card textarea:focus {
+  outline: none;
+  border-color: var(--primary-variant);
+  box-shadow: 0 8px 30px rgba(30,161,255,0.08);
+  transform: translateY(-1px);
+}
+
+/* disabled */
+.card input[disabled], .card select[disabled], .card textarea[disabled] {
+  background: rgba(0,0,0,0.02);
+  color: var(--muted);
+}
+
+/* --------- form layout helpers (use similar layout as template) --------- */
+.row { display:flex; gap: var(--form-gap); flex-wrap:wrap; align-items:flex-start; }
+.col { flex:1; min-width:180px; }
+
+/* nicer single-field groups */
+.card .field { margin-bottom:14px; }
+
+/* ---------- configuration pills (checkboxes) ---------- */
+#config-checkboxes { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:6px; }
+
+#config-checkboxes label {
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:8px 12px;
+  border-radius:999px;
+  cursor:pointer;
+  font-weight:700;
+  color:var(--text);
+  background:transparent;
+  border:1px solid transparent;
+  user-select:none;
+  transition: transform .06s ease, box-shadow .08s ease, background .12s ease;
+}
+
+/* visually hide native checkbox but keep accessible */
+#config-checkboxes input[type="checkbox"] { width:16px; height:16px; margin:0; transform:translateY(0); }
+
+/* rename the label text span style (template uses checkbox + span) */
+#config-checkboxes label span { font-weight:700; color:var(--label-color); padding:4px 6px; border-radius:999px; }
+
+/* when checked: pill look */
+#config-checkboxes label input[type="checkbox"]:checked + span,
+#config-checkboxes label input[type="checkbox"]:checked ~ span {
+  background: var(--pill-bg);
+  border:1px solid var(--pill-border);
+  color: var(--primary-variant);
+  box-shadow: 0 6px 18px rgba(20,50,90,0.03);
+  font-weight:800;
+}
+
+/* hover / focus */
+#config-checkboxes label:hover { transform: translateY(-2px); }
+#config-checkboxes input[type="checkbox"]:focus-visible + span { outline: 3px solid rgba(76,140,255,0.14); outline-offset:3px; }
+
+/* ---------- rental specific controls ---------- */
+#config-rental-select { margin-top:10px; display:block; }
+.rental-options { display:flex; gap:10px; align-items:center; margin-top:8px; }
+
+/* rental_type radios/styled toggles */
+.rental-toggle { display:inline-flex; gap:8px; align-items:center; }
+.rental-toggle input[type="radio"] { display:inline-block; width:16px; height:16px; }
+
+/* ---------- config meta boxes (price / rent / areas) ---------- */
+#config-meta-container { display:flex; gap:12px; flex-wrap:wrap; margin-top:12px; }
+#config-meta-container > div {
+  min-width:240px;
+  flex: 1 1 240px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.35));
+  border-radius:12px;
+  padding:12px;
+  border:1px dashed rgba(0,0,0,0.06);
+  transition: box-shadow .12s ease, border-color .12s ease, transform .08s ease;
+}
+#config-meta-container > div div:first-child { font-weight:800; margin-bottom:8px; color:var(--text); font-size:0.98rem; }
+
+/* inputs inside meta boxes */
+#config-meta-container input { padding:10px; border-radius:8px; border:1px solid var(--input-border); background:var(--input-bg); }
+
+/* subtle hover for meta */
+#config-meta-container > div:hover { transform: translateY(-4px); box-shadow: var(--elevation-1); }
+
+/* ---------- image inputs & previews ---------- */
+.images-row { display:flex; gap:12px; flex-wrap:wrap; margin-top:12px; }
+.images-row .img-col { flex:1 1 calc(25% - 9px); min-width:160px; display:flex; flex-direction:column; gap:8px; }
+
+.card .img-preview { border-radius:10px; overflow:hidden; border:1px solid rgba(0,0,0,0.04); background: linear-gradient(180deg, rgba(250,250,250,0.8), rgba(245,245,246,0.6)); padding:8px; display:flex; align-items:center; justify-content:center; min-height:90px; }
+.card .img-preview img { max-width:100%; max-height:110px; object-fit:cover; border-radius:8px; display:block; }
+
+/* prettier file chooser (fallback still native) */
+.file-chooser {
+  display:flex; gap:8px; align-items:center; justify-content:center;
+  background: var(--file-bg);
+  padding:8px; border-radius:10px; border:1px solid rgba(0,0,0,0.04);
+}
+
+/* ---------- address field + map helpers (NEW) ---------- */
+/* container to hold address input + optional "show map" button inline */
+.address-with-map {
+  display:flex;
+  gap:10px;
+  align-items:center;
+  width:100%;
+  margin-top:6px;
+}
+
+/* address input should match other inputs but have a slightly larger placeholder */
+.address-with-map input[type="text"],
+.card input[name="address"] {
+  padding:12px 14px;
+  border-radius:10px;
+  border:1px solid var(--input-border);
+  background: var(--input-bg);
+  color: var(--text);
+  font-size:14px;
+  flex:1 1 auto;
+}
+
+/* show map button (optional) */
+.map-btn {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 12px;
+  border-radius:10px;
+  background:transparent;
+  border:1px solid rgba(0,0,0,0.06);
+  cursor:pointer;
+  font-weight:700;
+  color:var(--text);
+  white-space:nowrap;
+}
+/* primary-emphasis variant for the button (use when you want stronger CTA) */
+.map-btn.primary {
+  background: linear-gradient(180deg,var(--primary),var(--primary-variant));
+  color:#fff;
+  border:none;
+  box-shadow: 0 8px 22px rgba(14,30,37,0.06);
+}
+
+/* map container (hidden by default — toggle via JS) */
+.map-container {
+  margin-top:10px;
+  border-radius:10px;
+  overflow:hidden;
+  border:1px solid rgba(0,0,0,0.06);
+  min-height:240px;
+  display:none; /* show it by adding .visible via JS */
+}
+
+/* when map is visible */
+.map-container.visible { display:block; }
+
+/* small close button for inline map */
+.map-close {
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:6px 8px;
+  border-radius:8px;
+  cursor:pointer;
+  background:transparent;
+  border:1px solid rgba(0,0,0,0.04);
+  color:var(--muted);
+  font-weight:700;
+  float:right;
+}
+
+/* ---------- buttons row (supports inline-styled fallback) ---------- */
+.form-actions,
+.card > .form-actions,
+.card > div[style*="justify-content:flex-end"],
+.card > div[style*="justify-content: flex-end"] {
+  display:flex;
+  gap:12px;
+  justify-content:flex-end;
+  align-items:center;
+  margin-top:18px;
+  flex-wrap:wrap;
+}
+
+/* generic button base */
+.form-actions .btn,
+.card > div[style*="justify-content:flex-end"] .btn,
+.form-actions a.btn,
+.form-actions button.btn,
+.card > div[style*="justify-content:flex-end"] a.btn,
+.card > div[style*="justify-content:flex-end"] button.btn {
+  padding:10px 14px;
+  border-radius:10px;
+  font-weight:800;
+  text-decoration:none;
+  cursor:pointer;
+  border:1px solid rgba(0,0,0,0.06);
+  background: transparent;
+  color: var(--text);
+  transition: transform .08s ease, box-shadow .12s ease, opacity .08s ease;
+}
+
+/* primary submit */
+.form-actions .add-btn,
+.card > div[style*="justify-content:flex-end"] .add-btn,
+.form-actions button.add-btn,
+.card > div[style*="justify-content:flex-end"] button.add-btn {
+  background: linear-gradient(180deg,var(--primary),var(--primary-variant));
+  color:#fff;
+  border:none;
+  box-shadow: 0 10px 30px rgba(14,30,37,0.08);
+}
+
+/* cancel */
+.form-actions a.btn.cancel,
+.card > div[style*="justify-content:flex-end"] a.btn.cancel { background:transparent; color:var(--muted); border:1px solid rgba(0,0,0,0.04); }
+
+/* hover */
+.form-actions a.btn:hover,
+.form-actions button.btn:hover,
+.card > div[style*="justify-content:flex-end"] a.btn:hover,
+.card > div[style*="justify-content:flex-end"] button.btn:hover { transform: translateY(-3px); opacity:0.98; }
+
+/* responsive: buttons center on small screens */
+@media (max-width:980px) {
+  .form-actions, .card > div[style*="justify-content:flex-end"] { justify-content:center; }
+}
+
+/* mobile stacking */
+@media (max-width:520px) {
+  .card { padding:16px; }
+  #config-meta-container { flex-direction:column; gap:12px; }
+  .images-row { flex-direction:column; }
+  .images-row .img-col { width:100%; flex:1 1 100%; }
+  .form-actions, .card > div[style*="justify-content:flex-end"] { flex-direction:column-reverse; gap:10px; }
+  .form-actions .add-btn, .card > div[style*="justify-content:flex-end"] .add-btn { width:100%; }
+}
+
+/* ---------- dark mode tweaks (leverage index.css variables) ---------- */
+.dark .card { border-color: rgba(255,255,255,0.03); box-shadow: var(--elevation-1); }
+.dark #config-meta-container > div { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-color: rgba(255,255,255,0.03); }
+.dark #config-checkboxes label span { color: var(--muted); }
+.dark #config-checkboxes label input[type="checkbox"]:checked + span,
+.dark #config-checkboxes label input[type="checkbox"]:checked ~ span { background: rgba(115,174,240,0.06); color: var(--primary); border-color: rgba(115,174,240,0.14); }
+.dark .card input, .dark .card select, .dark .card textarea { background: var(--card); color: var(--text); border-color: rgba(255,255,255,0.03); }
+.dark .card .img-preview { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.03); }
+.dark .form-actions .add-btn { box-shadow: 0 10px 30px rgba(2,8,14,0.6); }
+
+/* ---------- accessibility ---------- */
+input:focus, select:focus, textarea:focus, .switch-btn:focus, .btn:focus,
+#config-checkboxes input[type="checkbox"]:focus-visible + span {
+  outline: 3px solid rgba(76,140,255,0.18);
+  outline-offset: 4px;
+}
+
+/* minor utility */
+.hidden { display:none !important; }
+.center { text-align:center; }

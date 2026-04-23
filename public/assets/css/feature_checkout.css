@@ -1,0 +1,31 @@
+/* public/assets/css/feature_checkout.css
+   Simple, theme-aware styles for the feature checkout page.
+*/
+
+.fc-container { padding: 28px 16px; min-height: 72vh; }
+.fc-panel { max-width: 920px; margin: 16px auto; background: var(--card); border-radius: 12px; padding: 18px; box-shadow: var(--elevation-1); border: 1px solid rgba(0,0,0,0.04); }
+.fc-panel h1 { margin: 0 0 8px 0; font-size: 20px; }
+.muted { color: var(--muted); margin-bottom: 12px; }
+
+.plans { display:flex; gap:12px; flex-direction:column; margin-top: 12px; }
+.plan-card { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px; border-radius:10px; border:1px solid rgba(0,0,0,0.06); background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.98)); }
+:root.dark .plan-card { background: linear-gradient(180deg, rgba(11,22,30,0.65), rgba(7,14,22,0.5)); border:1px solid rgba(255,255,255,0.03); }
+
+.plan-title { font-weight:900; font-size:16px; }
+.plan-desc { color: var(--muted); font-size: 13px; margin-top:4px; }
+
+.plan-right { text-align:right; }
+.plan-price { font-weight:900; color: var(--primary); font-size:18px; margin-bottom:8px; }
+
+.btn-primary { padding:10px 14px; border-radius:8px; background: linear-gradient(180deg,var(--primary),var(--primary-variant)); color:#fff; border:0; cursor:pointer; font-weight:800; }
+.btn-outline { padding:8px 12px; border-radius:8px; border:1px solid rgba(0,0,0,0.06); background:transparent; color:inherit; font-weight:700; text-decoration:none; display:inline-block; margin-left:10px; }
+
+.fc-msg { margin:12px 0; padding:10px 12px; border-radius:8px; }
+.fc-error { background: rgba(255,230,230,0.95); color: #9a1a1a; border:1px solid rgba(255,50,50,0.06); }
+:root.dark .fc-error { background: rgba(80,20,20,0.12); color:#ffb6b6; }
+.fc-success { background: rgba(230,255,245,0.95); color: #05693c; border:1px solid rgba(0,120,80,0.06); }
+:root.dark .fc-success { background: rgba(12,60,40,0.12); color:#bfead1; }
+.fc-info { background: rgba(240,248,255,0.95); color: #083a66; border:1px solid rgba(30,161,255,0.06); }
+:root.dark .fc-info { background: rgba(16,32,48,0.45); color: var(--muted); border:1px solid rgba(115,174,240,0.06); }
+
+.row { display:flex; gap:12px; align-items:center; margin-top:12px; flex-wrap:wrap; }

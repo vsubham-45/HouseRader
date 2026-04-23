@@ -1,0 +1,398 @@
+/* seller_index.css — refreshed seller dashboard styles
+   Responsive, grid layout, hover effects, dark-mode aware */
+
+/* Container */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 18px;
+}
+
+/* Dashboard header */
+.dashboard-top .dashboard-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+.dashboard-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Stats */
+.dashboard-stats {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+.stat-box {
+  flex: 1 1 240px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #ffffff, #fbfdff);
+  box-shadow: 0 8px 26px rgba(7, 14, 30, 0.06);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.stat-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(7, 14, 30, 0.08);
+}
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  background: linear-gradient(180deg, #eef6ff, #dfeeff);
+}
+.stat-num {
+  font-weight: 800;
+  font-size: 1.6rem;
+  color: #10202b;
+}
+.stat-label {
+  font-size: 13px;
+  color: #6b7a83;
+}
+
+/* Listings grid */
+.listings-grid h2 {
+  margin-top: 6px;
+  margin-bottom: 12px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+@media (max-width: 980px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Card (grid layout) */
+.card-grid {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 26px rgba(7, 14, 30, 0.06);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.card-grid:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 48px rgba(7, 14, 30, 0.1);
+}
+
+.card-media-wrap {
+  position: relative;
+}
+.card-media {
+  width: 100%;
+  height: 160px;
+  background-size: cover;
+  background-position: center;
+}
+.featured-pill {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  background: #ffdf81;
+  color: #3b2b00;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-weight: 700;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+/* Overlay buttons */
+.card-action-overlay {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  display: flex;
+  gap: 8px;
+  pointer-events: none; /* avoid accidental clicks on overlay area */
+}
+.card-action-overlay .overlay-btn {
+  pointer-events: auto;
+}
+
+.overlay-btn {
+  display: inline-block;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #0b1720;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 13px;
+  border: 1px solid rgba(10, 16, 22, 0.06);
+  backdrop-filter: blur(4px);
+}
+
+/* Outline overlay variant — supports both "overlay-btn outline" and "overlay-btn.outline" */
+.overlay-btn.outline,
+.overlay-btn.outline, /* redundant but harmless to ensure matching */
+.overlay-btn[class~="outline"] {
+  background: transparent;
+  border: 1px solid rgba(10, 16, 22, 0.08);
+  color: inherit; /* readable on light backgrounds */
+}
+
+/* body section */
+.card-body {
+  padding: 12px 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.card-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #071424;
+  margin: 0;
+}
+.card-meta {
+  color: #6b7a83;
+  font-size: 13px;
+}
+.card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 6px;
+}
+.card-price {
+  font-weight: 800;
+  color: #0b1720;
+}
+.card-status {
+  font-size: 12px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: #f2f7ff;
+  color: #1452ff;
+  font-weight: 700;
+}
+
+/* Empty state */
+.empty-state {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  padding: 30px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #f8fbff, #ffffff);
+  box-shadow: 0 6px 20px rgba(7, 14, 30, 0.04);
+}
+.empty-emoji {
+  font-size: 48px;
+}
+
+/* Buttons */
+.btn-primary {
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+  background: linear-gradient(180deg, #4c8cff, #2f6bff);
+  color: #fff;
+  border: none;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(46, 92, 255, 0.12); }
+
+.btn-muted {
+  padding: 8px 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  border: 1px solid rgba(34, 50, 64, 0.06);
+  color: inherit;
+}
+
+/* Outline neutral button (for switch and other actions) */
+.btn-outline {
+  padding: 9px 14px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 14px;
+  background: transparent;
+  border: 1px solid rgba(20,40,60,0.14);
+  color: #0b1720;
+  cursor: pointer;
+  transition: all .18s ease;
+}
+.btn-outline:hover {
+  background: rgba(0,0,0,0.04);
+  border-color: rgba(20,40,60,0.25);
+}
+
+/* ============================
+      DARK MODE OVERRIDES
+   ============================ */
+.dark .stat-box {
+  background: #071219;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+.dark .stat-icon {
+  background: #0b1621;
+  color: #bfe0ff;
+}
+.dark .stat-num {
+  color: #e6f0f7;
+}
+.dark .stat-label {
+  color: #8fa0ac;
+}
+
+.dark .card-grid {
+  background: #071218;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+}
+.dark .card-title {
+  color: #e6f3ff;
+}
+.dark .card-meta {
+  color: #9aa6b2;
+}
+.dark .card-price {
+  color: #e6f3ff;
+}
+.dark .card-status {
+  background: rgba(255, 255, 255, 0.04);
+  color: #9aa6b2;
+}
+
+/* Dark empty state */
+.dark .empty-state {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+  box-shadow: 0 8px 30px rgba(2, 6, 12, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+.dark .empty-state h3 {
+  color: #e6f3ff;
+}
+.dark .empty-state .muted {
+  color: #9aa6b2;
+}
+
+/* Outline overlay button in dark mode */
+.dark .overlay-btn.outline,
+.dark .overlay-btn[class~="outline"] {
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #e6f3ff;
+}
+
+/* Dark overlay button */
+.dark .overlay-btn {
+  background: rgba(10, 16, 22, 0.6);
+  color: #e6f3ff;
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+/* Featured pill dark mode */
+.dark .featured-pill {
+  background: #624800;
+  color: #fff;
+}
+
+/* Accessibility */
+.card-grid:focus-within {
+  outline: 3px solid rgba(76, 140, 255, 0.18);
+  outline-offset: 6px;
+}
+
+/* Mobile */
+@media (max-width: 520px) {
+  .dashboard-top .dashboard-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .dashboard-actions {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .card-media {
+    height: 200px;
+  }
+}
+
+/* Switch role button styles: button or anchor */
+.switch-btn,
+button.switch-btn,
+a.switch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  border: 1px solid rgba(20,40,60,0.12);
+  color: #0b1720;
+  background: #ffffff;
+  transition: all .18s ease;
+}
+.switch-btn:hover,
+button.switch-btn:hover,
+a.switch-btn:hover {
+  background: #f1f5ff;
+  border-color: rgba(20,40,60,0.20);
+}
+
+/* Dark mode switch button */
+.dark .switch-btn,
+.dark button.switch-btn,
+.dark a.switch-btn {
+  background: rgba(255,255,255,0.05);
+  color: #e6f3ff;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+.dark .switch-btn:hover,
+.dark button.switch-btn:hover,
+.dark a.switch-btn:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.22);
+}
+
+/* Ensure focus states are visible */
+.switch-btn:focus,
+button.switch-btn:focus,
+a.switch-btn:focus,
+.btn-outline:focus,
+.overlay-btn:focus {
+  outline: 3px solid rgba(76,140,255,0.18);
+  outline-offset: 3px;
+}
+
+.profile-avatar img,
+.pm-avatar img,
+.icon-btn img {
+  display: block;
+}

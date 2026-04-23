@@ -1,0 +1,355 @@
+/* HouseRader inbox/chat - theme-aware (light default, dark when .dark on <html>) */
+
+/* Base (light-theme friendly) variables */
+:root{
+  --hr-primary: var(--primary, #1ea1ff);
+  --hr-primary-variant: var(--primary-variant, #0b7ed8);
+  --hr-card: var(--card, #ffffff);            /* card bg for light */
+  --hr-card-weak: rgba(2,8,14,0.04);
+  --hr-text: var(--text, #06202b);
+  --hr-muted: var(--muted, #6b7b84);
+  --hr-radius: 12px;
+  --hr-shadow: 0 10px 30px rgba(2,8,14,0.06);
+  --hr-fab-size: 56px;
+  --hr-panel-bg: linear-gradient(180deg,#ffffff,#fbfdff);
+  --hr-msg-bg: rgba(2,8,14,0.03);
+  --hr-msg-border: rgba(2,8,14,0.04);
+  --hr-input-bg: #fff;
+  --hr-input-border: rgba(2,8,14,0.06);
+  --hr-guest-cta-bg: #e6f3fb;
+  --hr-guest-cta-color: #071827;
+  --hr-guest-note-bg: linear-gradient(90deg, rgba(30,161,255,0.03), transparent);
+}
+
+/* Dark theme overrides when .dark is present on the root element */
+:root.dark,
+html.dark {
+  --hr-primary: #1ea1ff;
+  --hr-primary-variant: #0b7ed8;
+  --hr-card: #071522;            /* dark card bg */
+  --hr-card-weak: rgba(255,255,255,0.03);
+  --hr-text: #e6f3fb;
+  --hr-muted: #9fb1bf;
+  --hr-radius: 12px;
+  --hr-shadow: 0 12px 30px rgba(2,8,14,0.55);
+  --hr-fab-size: 56px;
+  --hr-panel-bg: linear-gradient(180deg, rgba(6,18,26,0.96), rgba(6,18,26,0.98));
+  --hr-msg-bg: rgba(255,255,255,0.03);
+  --hr-msg-border: rgba(255,255,255,0.02);
+  --hr-input-bg: rgba(0,0,0,0.12);
+  --hr-input-border: rgba(255,255,255,0.04);
+  --hr-guest-cta-bg: #e6f3fb;
+  --hr-guest-cta-color: #071827;
+  --hr-guest-note-bg: linear-gradient(90deg, rgba(30,161,255,0.03), transparent);
+}
+
+/* FAB */
+.hr-chat-fab{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  width:var(--hr-fab-size);
+  height:var(--hr-fab-size);
+  border-radius:999px;
+  display:inline-grid;
+  place-items:center;
+  background: linear-gradient(180deg, var(--hr-primary), var(--hr-primary-variant));
+  color:#fff;
+  font-size:22px;
+  border:0;
+  cursor:pointer;
+  box-shadow: 0 8px 20px rgba(2,8,14,0.14);
+  z-index:1300;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.hr-chat-fab:active{ transform: translateY(1px) scale(.995); }
+.hr-chat-fab .dot{ position:absolute; right:8px; top:8px; width:10px; height:10px; border-radius:999px; background:#ff6b6b; display:none; box-shadow:0 2px 6px rgba(0,0,0,0.12);}
+.hr-chat-fab.has-unread .dot{ display:block; }
+
+/* Panel container - uses theme vars */
+.hr-chat-panel{
+  position:fixed;
+  right:22px;
+  bottom: calc(22px + var(--hr-fab-size) + 12px);
+  width:360px;
+  max-width: calc(100% - 48px);
+  height:480px;
+  background: var(--hr-panel-bg);
+  color: var(--hr-text);
+  border-radius: var(--hr-radius);
+  box-shadow: var(--hr-shadow);
+  z-index:1310;
+  display:flex;
+  flex-direction:column;
+  transform: translateY(8px) scale(.992);
+  opacity:0;
+  pointer-events:none;
+  transition: transform .14s ease, opacity .12s ease;
+  overflow:hidden;
+  border: 1px solid rgba(2,8,14,0.04);
+  backdrop-filter: blur(6px);
+}
+
+/* open state */
+.hr-chat-panel.open{
+  transform:none;
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* Header */
+.hr-chat-header{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  padding:10px 12px;
+  border-bottom:1px solid rgba(2,8,14,0.04);
+  box-sizing:border-box;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+}
+:root.dark .hr-chat-header{
+  border-bottom:1px solid rgba(255,255,255,0.03);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+}
+.hr-chat-header .title{
+  font-weight:800;
+  font-size:15px;
+  line-height:1.05;
+  color:var(--hr-text);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width: calc(100% - 54px);
+}
+.hr-chat-header .sub{
+  display:block;
+  font-size:12px;
+  color:var(--hr-muted);
+  margin-top:4px;
+}
+
+/* close */
+#hrChatClose{
+  background:transparent;
+  border:0;
+  color:var(--hr-muted);
+  font-size:16px;
+  padding:6px;
+  border-radius:8px;
+  cursor:pointer;
+}
+#hrChatClose:hover{ background: rgba(2,8,14,0.04); color:var(--hr-text); }
+
+/* Guest notice bar - inline, pill CTAs */
+.hr-guest-note{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  padding:10px 12px;
+  font-size:13px;
+  color:var(--hr-muted);
+  border-bottom:1px solid rgba(2,8,14,0.04);
+  box-sizing:border-box;
+  background: var(--hr-guest-note-bg);
+}
+:root.dark .hr-guest-note{
+  border-bottom:1px solid rgba(255,255,255,0.02);
+}
+.hr-guest-note .text{ flex:1 1 auto; min-width:0; color:var(--hr-muted); }
+.hr-guest-note .hr-cta{
+  flex:0 0 auto;
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:700;
+  color: var(--hr-guest-cta-color);
+  background: var(--hr-guest-cta-bg);
+  text-decoration:none;
+  border:1px solid rgba(2,8,14,0.06);
+}
+.hr-guest-note .hr-cta.secondary{
+  background:transparent;
+  color:var(--hr-primary);
+  border:1px solid rgba(2,8,14,0.04);
+}
+
+/* Messages area */
+.hr-chat-messages{
+  flex:1 1 auto;
+  padding:10px;
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  box-sizing:border-box;
+  background: transparent;
+}
+
+/* message bubbles - use theme vars for backgrounds/borders */
+.hr-chat-messages .msg{
+  max-width:86%;
+  padding:8px 10px;
+  border-radius:10px;
+  background: var(--hr-msg-bg);
+  border: 1px solid var(--hr-msg-border);
+  color: var(--hr-text);
+  line-height:1.25;
+  box-shadow: 0 4px 12px rgba(2,8,14,0.04);
+  font-size:13px;
+  word-break:break-word;
+}
+.hr-chat-messages .msg.them{ align-self:flex-start; }
+.hr-chat-messages .msg.me{
+  align-self:flex-end;
+  background: linear-gradient(90deg, rgba(30,161,255,0.10), rgba(30,161,255,0.03));
+  border-color: rgba(30,161,255,0.06);
+  font-weight:600;
+  box-shadow: 0 6px 14px rgba(2,8,14,0.06);
+}
+
+/* placeholder subtle box */
+.hr-chat-messages .msg.placeholder{
+  opacity:0.95;
+  color: var(--hr-muted);
+  background: rgba(2,8,14,0.02);
+  border: 1px dashed rgba(2,8,14,0.03);
+}
+
+/* small timestamp styling */
+.hr-chat-messages .msg time{
+  display:block;
+  font-size:11px;
+  color:var(--hr-muted);
+  margin-top:6px;
+  opacity:0.85;
+  font-weight:400;
+  letter-spacing:0.1px;
+}
+
+/* send-note / error message appended to optimistic msg */
+.hr-chat-messages .msg .send-note{
+  display:block;
+  font-size:12px;
+  color: #b22222;
+  background: rgba(255, 50, 50, 0.04);
+  padding:6px 8px;
+  border-radius:8px;
+  margin-top:6px;
+  border: 1px solid rgba(255,50,50,0.06);
+}
+
+/* compose row */
+.hr-chat-compose{
+  display:flex;
+  gap:8px;
+  padding: 8px;
+  border-top: 1px solid rgba(2,8,14,0.04);
+  align-items:flex-end;
+  background: transparent;
+  box-sizing:border-box;
+  /* make compose area vertically compact when using only buttons */
+  justify-content: flex-start;
+}
+:root.dark .hr-chat-compose{
+  border-top: 1px solid rgba(255,255,255,0.03);
+}
+.hr-chat-input{
+  flex:1;
+  min-height:40px;
+  padding:8px 10px;
+  border-radius:10px;
+  border:1px solid var(--hr-input-border);
+  resize:vertical;
+  font-size:14px;
+  color:var(--hr-text);
+  background: var(--hr-input-bg);
+}
+.hr-chat-input::placeholder{ color: rgba(107,123,132,0.6); }
+.hr-chat-send{
+  background: var(--hr-primary);
+  color:#fff;
+  border:0;
+  padding:8px 12px;
+  border-radius:8px;
+  cursor:pointer;
+  min-width:56px;
+  font-weight:700;
+}
+.hr-chat-send:disabled{
+  opacity:0.65;
+  cursor:not-allowed;
+}
+
+/* ----- NEW: quick-interest button (used by quick message flow) ----- */
+/* keeps visual language consistent with other CTA/primary elements */
+.quick-interest {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  background: linear-gradient(180deg, var(--hr-primary), var(--hr-primary-variant));
+  color: #fff;
+  padding:10px 14px;
+  border-radius:10px;
+  border: 0;
+  cursor: pointer;
+  font-weight:800;
+  font-size:14px;
+  box-shadow: 0 8px 22px rgba(2,8,14,0.08);
+  transition: transform .08s ease, opacity .12s ease, box-shadow .12s ease;
+  white-space: nowrap;
+}
+.quick-interest:active { transform: translateY(1px); }
+.quick-interest:hover { box-shadow: 0 10px 26px rgba(2,8,14,0.10); }
+.quick-interest.disabled,
+.quick-interest[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Make sure quick button plays nicely with compose layout:
+   - If only the button is present, center it vertically.
+   - On narrow screens allow it to expand to full width for easier tapping. */
+.hr-chat-compose .quick-interest {
+  flex: 0 0 auto;
+}
+@media (max-width:520px) {
+  .hr-chat-compose .quick-interest { width:100%; justify-content:center; }
+}
+
+/* Used when "Open Conversation" is shown; reuse same style but allow different background */
+.quick-interest.open-conversation {
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  color: var(--hr-text);
+  border: 1px solid rgba(2,8,14,0.04);
+  box-shadow: none;
+}
+:root.dark .quick-interest.open-conversation {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+/* mobile */
+@media (max-width:520px){
+  .hr-chat-panel{
+    right:12px; left:12px; bottom:80px;
+    width:auto; height:60vh; max-height: calc(100vh - 120px);
+  }
+  .hr-guest-note{ padding:8px 10px; gap:6px; font-size:13px; }
+  .hr-chat-header .title{ font-size:14px; max-width: calc(100% - 44px); }
+}
+
+/* keyboard focus ring */
+.hr-chat-fab:focus, .hr-chat-panel :focus, .hr-cta:focus, #hrChatClose:focus, .hr-chat-send:focus, .quick-interest:focus {
+  outline: 3px solid rgba(30,161,255,0.12);
+  outline-offset: 2px;
+}
+
+/* nudge panel a little on very wide screens */
+@media (min-width:1200px){
+  .hr-chat-panel{ right: 24px; }
+}
+
+

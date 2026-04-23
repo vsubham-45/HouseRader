@@ -1,0 +1,265 @@
+/* public/assets/css/common.css
+   HouseRader — shared auth styles (signup/login)
+   Clean, responsive, respects html.dark for dark mode.
+*/
+
+/* === Reset / base === */
+* { box-sizing: border-box; }
+html,body { height:100%; margin:0; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+a { color:inherit; text-decoration:none; }
+.container { max-width:1100px; margin:0 auto; padding:0 18px; }
+
+/* === Theme variables (light) === */
+:root{
+  --primary: #1ea1ff;
+  --primary-variant: #0b7ed8;
+  --bg: linear-gradient(180deg,#f7fbff 0%, #eef6ff 100%);
+  --surface: #ffffff;
+  --card: #ffffff;
+  --text: #06202b;
+  --muted: #57707a;
+  --radius: 14px;
+  --elevation-1: 0 8px 30px rgba(14,30,37,0.06);
+  --elevation-2: 0 14px 40px rgba(14,30,37,0.08);
+  --accent-weak: rgba(30,161,255,0.08);
+  --input-border: rgba(6,32,44,0.06);
+  --shadow-strong: 0 18px 60px rgba(14,30,37,0.08);
+}
+
+/* === Dark theme === */
+html.dark, .dark {
+  --primary: #73aef0;
+  --primary-variant: #2e66a8;
+  --bg: linear-gradient(180deg,#051021 0%, #071927 100%);
+  --surface: #071326;
+  --card: #0b1b2a;
+  --text: #e6f4ff;
+  --muted: #9ab3c9;
+  --radius: 14px;
+  --elevation-1: 0 8px 30px rgba(2,8,14,0.6);
+  --elevation-2: 0 14px 40px rgba(2,8,14,0.7);
+  --accent-weak: rgba(115,174,240,0.06);
+  --input-border: rgba(255,255,255,0.06);
+  --shadow-strong: 0 18px 60px rgba(0,0,0,0.5);
+}
+
+/* base page */
+body {
+  min-height:100vh;
+  margin:0;
+  background: var(--bg);
+  color: var(--text);
+  transition: background .22s ease, color .22s ease;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* Make main a column flex container so children (hero + auth-wrapper) layout predictably */
+main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* navbar look (small, matches index) */
+.hr-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1200;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.55));
+  box-shadow: var(--elevation-1);
+}
+html.dark .hr-navbar { background: linear-gradient(180deg, rgba(8,16,28,0.6), rgba(6,12,22,0.4)); box-shadow: var(--elevation-1); }
+.brand { display:flex; align-items:center; gap:10px; font-weight:800; color:var(--primary-variant); font-size:1.06rem; }
+
+/* Hero area (top) */
+.page-hero { padding:48px 12px 18px; text-align:left; max-width:980px; margin:0 auto 12px; }
+.hero-title { font-size:30px; margin:0 0 8px; letter-spacing:-0.02em; font-weight:800; color:var(--text); }
+.hero-sub { margin:0 0 18px; color:var(--muted); font-size:15px; }
+
+/* ===== Auth wrapper & card ===== */
+/* Auth wrapper: vertically center the card by filling remaining space inside <main> */
+.auth-wrapper {
+  display: flex;
+  align-items: center;      /* vertical centering */
+  justify-content: center;  /* horizontal centering */
+  padding: 20px;            /* preserve existing spacing */
+  box-sizing: border-box;
+  /* Let the wrapper grow/shrink to fill available space inside <main> */
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 0; /* prevents flex overflow issues in some browsers */
+}
+
+/* Slight tweak for very tall viewports so the card doesn't float too high */
+@media (min-height: 900px) {
+  .auth-wrapper { padding-top: 36px; padding-bottom: 36px; }
+}
+
+/* Mobile override keeps centering while allowing the card to take more vertical space */
+@media (max-width: 520px) {
+  .auth-wrapper {
+    min-height: auto;
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+}
+
+/* core card */
+.auth-card {
+  width:100%;
+  max-width:620px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.98));
+  border-radius: var(--radius);
+  padding:28px;
+  box-shadow: var(--shadow-strong);
+  border: 1px solid rgba(0,0,0,0.04);
+  color: var(--text);
+}
+
+/* dark adjustments for card */
+html.dark .auth-card {
+  background: linear-gradient(180deg, rgba(11,22,30,0.6), rgba(7,14,22,0.45));
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+/* narrow variant for tighter forms */
+.auth-card.narrow { max-width:520px; }
+
+/* headings */
+.auth-card h2 { margin:0 0 6px; font-size:20px; font-weight:800; }
+.auth-card p.lead { margin:0 0 16px; color:var(--muted); font-size:0.98rem; }
+
+/* messages */
+.messages { margin-bottom:14px; }
+.msg-error {
+  background: rgba(255,230,230,0.95);
+  color: #9a1a1a;
+  padding:10px 12px;
+  border-radius:10px;
+  font-size:0.95rem;
+}
+html.dark .msg-error { background: rgba(80,20,20,0.15); color: #ffb6b6; }
+
+.msg-success {
+  background: rgba(230,255,245,0.95);
+  color: #05693c;
+  padding:10px 12px;
+  border-radius:10px;
+  font-size:0.95rem;
+}
+html.dark .msg-success { background: rgba(12,60,40,0.12); color: #bfead1; }
+
+/* ===== Form styles ===== */
+.form-grid { display:block; }
+.form-row { margin-bottom:14px; position:relative; }
+.form-row label { display:block; font-weight:700; margin-bottom:8px; color:var(--muted); font-size:0.95rem; }
+
+/* Inputs */
+.form-row input[type="text"],
+.form-row input[type="email"],
+.form-row input[type="tel"],
+.form-row input[type="password"],
+.form-row input[type="number"] {
+  width:100%;
+  padding:12px 14px;
+  border-radius:10px;
+  border:1px solid var(--input-border);
+  background: var(--surface);
+  color: var(--text);
+  font-size:15px;
+  transition: box-shadow .12s ease, border-color .12s ease, transform .08s;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* input focus */
+.form-row input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 10px 30px rgba(14,30,37,0.06);
+  transform: translateY(-0.4px);
+}
+
+/* placeholder color subtle */
+.form-row input::placeholder { color: #aab7bf; opacity:1; }
+
+/* password eye button (inside input) */
+.input-with-toggle { position:relative; }
+.toggle-visibility {
+  position:absolute;
+  right:8px;
+  top:50%;
+  transform:translateY(-50%);
+  border:0;
+  background:transparent;
+  cursor:pointer;
+  font-size:16px;
+  padding:6px;
+  border-radius:8px;
+  color:var(--muted);
+}
+.toggle-visibility:hover { color:var(--primary); }
+.toggle-visibility:focus { outline: 2px solid rgba(30,161,255,0.12); outline-offset: 2px; border-radius:8px; }
+
+/* form actions */
+.form-actions { display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-top:8px; }
+.btn-primary {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background: linear-gradient(180deg,var(--primary),var(--primary-variant));
+  color:#fff;
+  padding:12px 18px;
+  border-radius:10px;
+  border:0;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow: 0 10px 30px rgba(14,30,37,0.08);
+}
+.btn-primary:active { transform:translateY(1px); }
+.muted-small { color:var(--muted); font-size:0.95rem; }
+
+/* subtle link style */
+.auth-card a { color: var(--primary-variant); font-weight:700; text-decoration:underline; text-underline-offset:3px; }
+
+/* extra small helper text under inputs */
+.input-hint { font-size:0.9rem; color:var(--muted); margin-top:6px; }
+
+/* auth footer */
+.auth-footer { margin-top:18px; color:var(--muted); font-size:0.95rem; text-align:left; }
+
+/* focus ring accessibility */
+.auth-card :focus { outline: 3px solid rgba(30,161,255,0.12); outline-offset:4px; border-radius:8px; }
+
+/* responsiveness */
+@media (max-width:880px) {
+  .auth-card { padding:20px; max-width:560px; }
+  .page-hero { padding:36px 12px 12px; }
+  .hero-title { font-size:24px; }
+}
+@media (max-width:520px) {
+  .container { padding:0 12px; }
+  .auth-card { margin:0 12px; padding:16px; border-radius:12px; width:100%; }
+  .hero-title { font-size:20px; text-align:left; }
+  .form-row label { font-size:0.92rem; }
+  .btn-primary { padding:10px 14px; }
+}
+
+/* Fix autofill colour clash */
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px var(--surface) inset !important;
+  box-shadow: 0 0 0px 1000px var(--surface) inset !important;
+  -webkit-text-fill-color: var(--text) !important;
+}
+
+/* small helpers for layout when errors are long */
+.msg-error strong, .msg-success strong { display:block; margin-bottom:6px; }

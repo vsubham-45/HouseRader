@@ -1,0 +1,63 @@
+/* Inbox Floating Button — Uses global theme vars from index.css */
+
+#hrInboxFab {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1400;
+  display: grid;
+  place-items: center;
+  pointer-events: auto;
+}
+
+#hrInboxFab a {
+  width: 56px;
+  height: 56px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--primary);
+  color: #fff;
+  text-decoration: none;
+  font-size: 22px;
+  box-shadow: var(--elevation-2);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+#hrInboxFab a:focus {
+  outline: 3px solid rgba(255,255,255,0.14);
+  outline-offset: 4px;
+}
+
+.fab-icon {
+  line-height: 1;
+}
+
+/* Notification dot */
+.hr-fab-dot {
+  position: absolute;
+  right: 12px;
+  top: 8px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #ff4d6d, #ff2b45);
+  border: 2px solid var(--card);
+  box-shadow: 0 6px 16px rgba(255,43,69,0.30);
+}
+
+/* Responsive size */
+@media (max-width: 520px) {
+  #hrInboxFab a {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    font-size: 20px;
+  }
+  .hr-fab-dot {
+    width: 12px;
+    height: 12px;
+    right: 10px;
+    top: 6px;
+  }
+}
