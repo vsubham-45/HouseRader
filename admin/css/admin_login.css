@@ -1,0 +1,229 @@
+/* public/assets/css/admin_login.css
+   Admin login page styles — uses site variables from index.css and supports dark mode.
+*/
+
+:root {
+  --login-bg: linear-gradient(180deg,#f7fbff,#eef6ff);
+}
+
+/* Centering root */
+.admin-login-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 16px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* Card */
+.login-card {
+  width: 100%;
+  max-width: 520px;
+  background: var(--card);
+  border-radius: 14px;
+  padding: 26px;
+  box-shadow: var(--elevation-1);
+  border: 1px solid rgba(0,0,0,0.04);
+}
+
+.login-card .brand {
+  display:flex;
+  gap:10px;
+  align-items:center;
+  font-weight:800;
+  color:var(--primary-variant);
+  text-decoration:none;
+  margin-bottom:8px;
+}
+
+/* Heading */
+.login-card h1 {
+  margin: 6px 0 6px;
+  font-size: 20px;
+  color: var(--text);
+}
+.login-card .muted { color: var(--muted); margin-bottom:12px; }
+
+/* Messages */
+.msg { border-radius:10px; padding:12px; margin-bottom:12px; }
+.msg-error { background:#fdecea; color:#b00020; border:1px solid rgba(176,0,32,0.08); }
+.msg ul { margin:8px 0 0 18px; padding:0; }
+
+/* Form */
+.login-form label {
+  display:block;
+  font-weight:700;
+  margin-top:10px;
+  margin-bottom:6px;
+  color:var(--label-color, var(--muted));
+}
+.login-form input[type="email"],
+.login-form input[type="password"] {
+  width:100%;
+  padding:12px 14px;
+  border-radius:10px;
+  border:1px solid rgba(0,0,0,0.06);
+  background:var(--card);
+  color:var(--text);
+  font-size:14px;
+  transition: box-shadow .12s ease, border-color .12s ease;
+}
+.login-form input:focus {
+  outline: none;
+  border-color: var(--primary-variant);
+  box-shadow: 0 8px 30px rgba(30,161,255,0.08);
+}
+
+/* Buttons row */
+.form-row {
+  display:flex;
+  gap:10px;
+  align-items:center;
+  margin-top:16px;
+}
+.btn-primary {
+  flex: 1 1 auto;
+  padding:10px 14px;
+  background: linear-gradient(180deg,var(--primary),var(--primary-variant));
+  color: #fff;
+  border-radius:10px;
+  border: none;
+  font-weight:700;
+  cursor:pointer;
+}
+.btn-muted {
+  padding:10px 14px;
+  border-radius:10px;
+  border:1px solid rgba(0,0,0,0.06);
+  background: transparent;
+  color: var(--text);
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* Small hint */
+.hint {
+  margin-top:12px;
+  padding-top:8px;
+  border-top: 1px dashed rgba(0,0,0,0.04);
+  font-size:13px;
+}
+
+/* Footer */
+.login-footer {
+  margin-top:18px;
+  color:var(--muted);
+  font-size:13px;
+}
+
+/* Dark mode overrides */
+.dark .login-card { background: var(--card); border-color: rgba(255,255,255,0.03); box-shadow: var(--elevation-1); }
+.dark .msg-error { background: rgba(255,10,10,0.04); color:#ffc9c9; border-color: rgba(255,10,10,0.06); }
+.dark .btn-muted { border-color: rgba(255,255,255,0.06); color: var(--text); }
+
+/* Responsive */
+@media (max-width:520px) {
+  .login-card { padding:18px; border-radius:12px; }
+  .form-row { flex-direction: column; }
+  .btn-primary { width:100%; }
+  .btn-muted { width:100%; }
+}
+
+/* ---------- Mobile & Small Screen Enhancements ---------- */
+@media (max-width: 768px) {
+  .admin-login-root {
+    padding: 24px 14px;
+  }
+
+  .login-card {
+    max-width: 100%;
+  }
+
+  .login-card h1 {
+    font-size: 19px;
+  }
+
+  .login-card .muted {
+    font-size: 14px;
+  }
+}
+
+/* Phones */
+@media (max-width: 520px) {
+  .admin-login-root {
+    justify-content: flex-start;
+    padding-top: max(24px, env(safe-area-inset-top));
+    padding-bottom: max(24px, env(safe-area-inset-bottom));
+  }
+
+  .login-card {
+    padding: 18px;
+    border-radius: 12px;
+  }
+
+  .login-card .brand {
+    font-size: 16px;
+  }
+
+  .login-card h1 {
+    font-size: 18px;
+    line-height: 1.3;
+  }
+
+  .login-form label {
+    font-size: 13px;
+  }
+
+  .login-form input[type="email"],
+  .login-form input[type="password"] {
+    font-size: 15px;
+    padding: 14px 14px; /* better touch height */
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .btn-primary,
+  .btn-muted {
+    width: 100%;
+    padding: 14px;
+    font-size: 15px;
+  }
+
+  .msg {
+    font-size: 14px;
+  }
+
+  .hint {
+    font-size: 12.5px;
+  }
+
+  .login-footer {
+    font-size: 12.5px;
+    text-align: center;
+  }
+}
+
+/* Very small phones (iPhone SE, old Androids) */
+@media (max-width: 360px) {
+  .login-card {
+    padding: 16px;
+  }
+
+  .login-card h1 {
+    font-size: 17px;
+  }
+
+  .btn-primary,
+  .btn-muted {
+    font-size: 14px;
+  }
+}

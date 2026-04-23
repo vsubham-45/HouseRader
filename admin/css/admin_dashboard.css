@@ -1,0 +1,197 @@
+/* ========= ADMIN DASHBOARD ========= */
+
+.admin-badge {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: var(--accent-weak);
+  color: var(--primary-variant);
+  font-weight: 800;
+}
+
+.admin-dashboard {
+  padding: 24px 0 40px;
+}
+
+/* ===== Stats ===== */
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.stat-card {
+  background: var(--card);
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: var(--elevation-1);
+  border: 1px solid rgba(0,0,0,0.04);
+}
+
+.stat-label {
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.stat-value {
+  font-size: 26px;
+  font-weight: 900;
+  margin-top: 4px;
+}
+
+.stat-card.pending { border-left: 4px solid #f0b429; }
+.stat-card.live { border-left: 4px solid #22c55e; }
+.stat-card.rejected { border-left: 4px solid #ef4444; }
+
+/* ===== Sections ===== */
+.admin-section {
+  margin-bottom: 36px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.section-link {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+/* ===== Pending Properties Cards (FIXED) ===== */
+.pending-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 18px;
+}
+
+.pending-card {
+  background: var(--card);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--elevation-1);
+  border: 1px solid rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.pending-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--elevation-2);
+}
+
+/* 🔥 IMAGE FIX */
+.pending-img {
+  height: 180px;              /* FIXED HEIGHT */
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #eef2f7;
+}
+
+/* Body */
+.pending-body {
+  padding: 14px;
+}
+
+.pending-title {
+  font-weight: 900;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.pending-meta {
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 14px;
+}
+
+/* Actions */
+.pending-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.pending-actions a {
+  flex: 1;
+  text-align: center;
+  padding: 8px 10px;
+  font-weight: 800;
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+/* Buttons */
+.btn-view {
+  background: var(--accent-weak);
+  color: var(--primary-variant);
+}
+
+.btn-approve {
+  background: linear-gradient(180deg,#22c55e,#16a34a);
+  color: #fff;
+}
+
+.btn-reject {
+  background: linear-gradient(180deg,#ef4444,#dc2626);
+  color: #fff;
+}
+
+/* ===== Activity ===== */
+.activity-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.activity-item {
+  display: grid;
+  grid-template-columns: 100px 1fr auto;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  font-size: 14px;
+}
+
+.activity-type {
+  font-weight: 800;
+  text-transform: capitalize;
+}
+
+.activity-meta {
+  color: var(--muted);
+}
+
+.activity-time {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* ===== Buttons ===== */
+.btn-logout {
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: linear-gradient(180deg,var(--primary),var(--primary-variant));
+  color: #fff;
+  font-weight: 800;
+}
+
+.btn-secondary {
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-weight: 800;
+  background: var(--accent-weak);
+  color: var(--primary-variant);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+.btn-secondary:hover {
+  background: linear-gradient(180deg,var(--primary),var(--primary-variant));
+  color: #fff;
+}

@@ -1,0 +1,158 @@
+/* ========= ADMIN PROPERTIES ========= */
+
+.admin-properties {
+  padding: 24px 0 40px;
+}
+
+/* Page header */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 900;
+}
+
+/* ================= STATUS TABS ================= */
+
+.status-tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.status-tabs a {
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: 800;
+  background: var(--accent-weak);
+  color: var(--primary-variant);
+  text-decoration: none;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.status-tabs a:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--elevation-1);
+}
+
+.status-tabs a.active {
+  background: linear-gradient(
+    180deg,
+    var(--primary),
+    var(--primary-variant)
+  );
+  color: #fff;
+}
+
+/* ================= GRID ================= */
+
+.property-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+/* ================= CARD ================= */
+
+.property-card {
+  background: var(--card);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--elevation-1);
+  border: 1px solid rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.property-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--elevation-2);
+}
+
+/* ================= IMAGE ================= */
+/*
+  IMPORTANT:
+  ❌ DO NOT set background-image here
+  ✅ Image is controlled ONLY via inline PHP style
+*/
+.property-img {
+  height: 160px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #eef3f8; /* fallback if image missing */
+}
+
+/* ================= BODY ================= */
+
+.property-body {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.property-title {
+  font-weight: 900;
+  font-size: 15px;
+}
+
+.property-meta {
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+/* ================= ACTIONS ================= */
+
+.property-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.property-actions a {
+  flex: 1;
+  text-align: center;
+  padding: 8px;
+  font-size: 13px;
+  font-weight: 800;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: opacity .15s ease, transform .15s ease;
+}
+
+.property-actions a:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.btn-view {
+  background: var(--accent-weak);
+  color: var(--primary-variant);
+}
+
+.btn-approve {
+  background: linear-gradient(180deg, #22c55e, #16a34a);
+  color: #fff;
+}
+
+.btn-reject {
+  background: linear-gradient(180deg, #ef4444, #dc2626);
+  color: #fff;
+}
+
+/* ================= EMPTY STATE ================= */
+
+.empty-state {
+  padding: 40px;
+  text-align: center;
+  color: var(--muted);
+  font-weight: 700;
+}
