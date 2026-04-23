@@ -36,7 +36,7 @@ It enables users to explore properties, sellers to manage listings, and admins t
 ---
 
 ## 📸 Screenshots
-
+Admin Dashboard:
 <img width="1920" height="1080" alt="image_2026-02-28_10-28-00" src="https://github.com/user-attachments/assets/98f63a46-2a35-4536-9939-a80383550466" />
 
 
