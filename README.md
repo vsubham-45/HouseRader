@@ -36,6 +36,21 @@ It enables users to explore properties, sellers to manage listings, and admins t
 ---
 
 ## 📸 Screenshots
+Homepage:
+<img width="1920" height="1080" alt="image_2026-02-28_10-29-34" src="https://github.com/user-attachments/assets/596ab3b5-5829-416a-9766-5cdf891b3553" />
+
+Properties details page:
+<img width="1920" height="1080" alt="image_2026-02-28_10-32-07 (2)" src="https://github.com/user-attachments/assets/ef3edc69-35b1-43df-8252-37b75a47c14e" />
+
+Inbox:
+<img width="1920" height="1080" alt="image_2026-02-28_10-42-30 (2)" src="https://github.com/user-attachments/assets/d0d1d937-d8e2-4b3f-9c7f-f0b0cd4f5443" />
+
+Seller Dashboard:
+<img width="1920" height="1080" alt="image_2026-02-28_10-35-19" src="https://github.com/user-attachments/assets/f11e2549-41cf-4c81-8a2b-004d54f31deb" />
+
+Featuring page:
+<img width="1920" height="1080" alt="image_2026-02-28_10-38-53" src="https://github.com/user-attachments/assets/65b5dad4-c93b-4f6c-8d2b-0a03bdf8e14d" />
+
 Admin Dashboard:
 <img width="1920" height="1080" alt="image_2026-02-28_10-28-00" src="https://github.com/user-attachments/assets/98f63a46-2a35-4536-9939-a80383550466" />
 
