@@ -1,103 +1,114 @@
-# 🏠 HouseRader – Full Stack Real Estate Platform
+# 🏠 HouseRader – Full Stack Real Estate Platform  
 
-HouseRader is a full-stack real estate web application built using PHP, MySQL, HTML, CSS, and JavaScript.
-It allows users to browse properties, sellers to manage listings, and admins to control and moderate the platform.
+![PHP](https://img.shields.io/badge/PHP-Backend-blue)
+![MySQL](https://img.shields.io/badge/MySQL-Database-orange)
+![Status](https://img.shields.io/badge/Status-Active-success)
+
+HouseRader is a full-stack real estate web application built using **PHP, MySQL, HTML, CSS, and JavaScript**.  
+It enables users to explore properties, sellers to manage listings, and admins to control and moderate the platform.
 
 ---
 
 ## 🚀 Features
 
-### 👤 User Features
+### 👤 User
+- Secure login (OTP + Google OAuth)
+- Browse & view property listings
+- Real-time messaging with sellers
+- Profile management
 
-* User registration & login (OTP + Google OAuth)
-* Browse and view property listings
-* Messaging system (user ↔ seller)
-* Profile management
+### 🏢 Seller
+- Add, edit, and manage properties
+- Handle user inquiries/messages
+- Switch between seller & user roles
 
-### 🏢 Seller Features
+### 🛡️ Admin
+- Admin dashboard
+- Approve / reject properties
+- Monitor platform activity
 
-* Add, edit, and manage property listings
-* View inquiries/messages from users
-* Switch between seller and user roles
+### 💬 System Features
+- Messaging/inbox system
+- Property featuring (mock payment system)
+- Image upload handling
+- Responsive UI + dark mode
 
-### 🛡️ Admin Features
+---
 
-* Admin login & dashboard
-* Approve / reject property listings
-* Monitor platform activity
-* Manage users and properties
+## 📸 Screenshots
 
-### 💬 Additional Features
+<img width="1920" height="1080" alt="image_2026-02-28_10-28-00" src="https://github.com/user-attachments/assets/98f63a46-2a35-4536-9939-a80383550466" />
 
-* Real-time messaging/inbox system
-* Property featuring system (mock payment gateway)
-* Image upload & handling
-* Responsive UI with dark mode support
 
 ---
 
 ## 🛠️ Tech Stack
 
-* **Frontend:** HTML, CSS, JavaScript
-* **Backend:** PHP
-* **Database:** MySQL
-* **Authentication:** OTP + Google OAuth
-* **Server:** XAMPP (Local)
+- **Frontend:** HTML, CSS, JavaScript  
+- **Backend:** PHP  
+- **Database:** MySQL  
+- **Authentication:** OTP + Google OAuth  
+- **Server:** XAMPP  
 
 ---
 
 ## 📂 Project Structure
 
 ```
-admin/        → Admin panel & controls  
-api/          → Backend APIs (OTP, messages, auth, etc.)  
-public/       → Main application (user/seller UI)  
-src/          → Core backend logic (DB, sessions)  
+admin/        → Admin panel  
+api/          → Backend APIs  
+public/       → UI (user/seller)  
+src/          → Core backend logic  
 storage/      → Logs  
-tools/        → Debug & maintenance scripts  
+tools/        → Debug scripts  
+database/     → SQL file  
 ```
 
 ---
 
 ## ⚙️ Setup Instructions
 
-### 1. Clone the repository
+### 1. Clone Repository
 
-```
+```bash
 git clone https://github.com/vsubham-45/HouseRader.git
 cd HouseRader
 ```
 
-### 2. Move to XAMPP
+---
 
-Place the project inside:
+### 2. Move to XAMPP
 
 ```
 htdocs/HouseRader
 ```
 
+---
+
 ### 3. Setup Database
 
-* Open phpMyAdmin
-* Create a database:
+- Open phpMyAdmin  
+- Create database:
 
 ```
 houserader
 ```
 
-* Import the provided `.sql` file
+- Import:
+
+```
+database/houserader_sample.sql
+```
 
 ---
 
-### 4. Configure Database Connection
+### 4. Configure Database
 
 Edit:
 
 ```
 src/db.php
 ```
-
-Set your credentials:
 
 ```php
 $DB_HOST = 'localhost';
@@ -110,17 +121,15 @@ $DB_PASS = '';
 
 ### 5. Run the Project
 
-Open in browser:
-
 ```
 http://localhost/HouseRader/public/index.php
 ```
 
 ---
 
-## 🔐 Environment Setup (Important)
+## 🔐 Environment Setup
 
-Create a file:
+Create:
 
 ```
 src/config.php
@@ -138,39 +147,38 @@ define('GOOGLE_CLIENT_SECRET', 'your_client_secret');
 
 ---
 
-## 🧪 Demo Login (For Testing)
+## 🧪 Demo Login
 
-Use this demo account:
-
-* **Email:** [demoacc@gmail.com](mailto:demoacc@gmail.com)
-* **Password:** 12345678
+```
+Email: demoacc@gmail.com
+Password: 12345678
+```
 
 ---
 
-## 📌 Highlights
+## 📌 Why This Project?
 
-* Multi-role authentication system (User / Seller / Admin)
-* Full backend logic with structured PHP
-* Real-world features like messaging, OTP, payments simulation
-* Clean database design with relationships
-* Responsive UI with dark mode
+- Demonstrates full-stack development skills  
+- Includes real-world features (auth, messaging, payments simulation)  
+- Shows database design + backend logic  
+- Built with a modular and scalable structure  
 
 ---
 
 ## 📈 Future Improvements
 
-* Deploy to live server (Hostinger / VPS)
-* Add real payment gateway integration
-* Improve search & filtering system
-* Add REST API structure
-* Implement security enhancements (rate limiting, validation layers)
+- Deploy to production server  
+- Add real payment gateway  
+- Improve search & filtering  
+- REST API architecture  
+- Security enhancements  
 
 ---
 
 ## 👨‍💻 Author
 
-**Subham Vishwakarma**
-BSc IT Graduate | Aspiring Full Stack Developer
+**Subham Vishwakarma**  
+BSc IT Graduate | Aspiring Full Stack Developer  
 
 ---
 
