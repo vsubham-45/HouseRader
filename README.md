@@ -35,6 +35,14 @@ It enables users to explore properties, sellers to manage listings, and admins t
 
 ---
 
+## 🎥 Demo Video
+
+👉 Watch full working demo here:  https://drive.google.com/drive/folders/1f2pkF6ZGHjL5Kqkz-lmGT0fu5-Tc9pMG?usp=sharing
+
+⚠️ Note: Google OAuth requires proper domain configuration.  
+For testing all features, please use the demo credentials provided below.
+---
+
 ## 📸 Screenshots
 Homepage:
 <img width="1920" height="1080" alt="image_2026-02-28_10-29-34" src="https://github.com/user-attachments/assets/596ab3b5-5829-416a-9766-5cdf891b3553" />
@@ -53,7 +61,6 @@ Featuring page:
 
 Admin Dashboard:
 <img width="1920" height="1080" alt="image_2026-02-28_10-29-02 (2)" src="https://github.com/user-attachments/assets/90d5b11f-5fb1-4130-92c8-321692241fbc" />
-
 ---
 
 ## 🛠️ Tech Stack
