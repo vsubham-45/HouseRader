@@ -1,0 +1,30 @@
+# 🔒 Environment / Secrets
+.env
+
+# 📦 Dependency folders (future-proof)
+node_modules/
+vendor/
+
+# 🗂️ Uploads (user-generated content)
+public/uploads/
+public/uploads/attachments/
+
+# 🧾 Logs
+*.log
+storage/
+
+# 🖥️ OS junk files
+.DS_Store
+Thumbs.db
+
+# 🧪 Temporary / test files
+test_db.php
+
+# 🛠️ IDE files
+.vscode/
+.idea/
+
+# 📁 Misc
+*.zip
+*.tar
+*.gz
