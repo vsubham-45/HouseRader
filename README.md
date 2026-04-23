@@ -52,8 +52,7 @@ Featuring page:
 <img width="1920" height="1080" alt="image_2026-02-28_10-38-53" src="https://github.com/user-attachments/assets/65b5dad4-c93b-4f6c-8d2b-0a03bdf8e14d" />
 
 Admin Dashboard:
-<img width="1920" height="1080" alt="image_2026-02-28_10-28-00" src="https://github.com/user-attachments/assets/98f63a46-2a35-4536-9939-a80383550466" />
-
+<img width="1920" height="1080" alt="image_2026-02-28_10-29-02 (2)" src="https://github.com/user-attachments/assets/90d5b11f-5fb1-4130-92c8-321692241fbc" />
 
 ---
 
